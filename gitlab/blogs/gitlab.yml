@@ -1,0 +1,86 @@
+version: '2.0'
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    restart: always
+    privileged: true
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url  'https://82.157.55.94:8929'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2224
+        nginx['redirect_http_to_https'] = true
+        letsencrypt['enable'] = false
+        nginx['ssl_certificate'] = "/etc/gitlab/nginx.pem"
+        nginx['ssl_certificate_key'] = "/etc/gitlab/nginx.key"
+        # 关闭电子邮件相关功能
+        gitlab_rails['smtp_enable'] = false
+        gitlab_rails['gitlab_email_enabled'] = false
+        gitlab_rails['incoming_email_enabled'] = false
+
+        # Terraform
+        gitlab_rails['terraform_state_enabled'] = false
+
+        # Usage Statistics
+        gitlab_rails['usage_ping_enabled'] = false
+        gitlab_rails['sentry_enabled'] = false
+        grafana['reporting_enabled'] = false
+
+        # 关闭容器仓库功能
+        gitlab_rails['gitlab_default_projects_features_container_registry'] = false
+        gitlab_rails['registry_enabled'] = false
+        registry['enable'] = false
+        registry_nginx['enable'] = false
+
+        # 包仓库
+        gitlab_rails['packages_enabled'] = false
+        gitlab_rails['dependency_proxy_enabled'] = false
+
+        # GitLab KAS
+        gitlab_kas['enable'] = false
+        gitlab_rails['gitlab_kas_enabled'] = false
+
+        # Mattermost
+        mattermost['enable'] = false
+        mattermost_nginx['enable'] = false
+
+        # Kerberos
+        gitlab_rails['kerberos_enabled'] = false
+        sentinel['enable'] = false
+
+        # GitLab Pages
+        gitlab_pages['enable'] = false
+        pages_nginx['enable'] = false
+
+        # 禁用 PUMA 集群模式
+        puma['enable'] = true
+        puma['worker_timeout'] = 60
+        puma['worker_processes'] = 2
+        puma['max_threads'] = 4
+        puma['per_worker_max_memory_mb'] = 1024
+
+        # 降低后台守护进程并发数
+        sidekiq['max_concurrency'] = 5
+
+        gitlab_ci['gitlab_ci_all_broken_builds'] = false
+        gitlab_ci['gitlab_ci_add_pusher'] = false
+
+        # 关闭监控
+        prometheus_monitoring['enable'] = false
+        alertmanager['enable'] = false
+        node_exporter['enable'] = false
+        redis_exporter['enable'] = false
+        postgres_exporter['enable'] = false
+        pgbouncer_exporter['enable'] = false
+        gitlab_exporter['enable'] = false
+        grafana['enable'] = false
+        sidekiq['metrics_enabled'] = false
+        postgresql['shared_buffers'] = "256MB"
+        postgresql['max_worker_processes'] = 8
+    ports:
+      - '8929:8929'
+      - '2224:22'
+    volumes:
+      - /srv/gitlab/config:/etc/gitlab
+      - /srv/gitlab/logs:/var/log/gitlab
+      - /srv/gitlab/data:/var/opt/gitlab
