@@ -1,0 +1,24 @@
+version: '2.0'
+services:
+  gitea:
+    image: gitea/gitea:latest
+    container_name: gitea
+    environment:
+      - USER_UID = 1000
+      - USER_GID = 1000
+      - APP_NAME = gitea
+      - PROTOCOL = http
+      - DOMAIN = 82.157.55.94
+      - ROOT_URL = http://82.157.55.94:8929/
+      - CERT_FILE = /etc/config/cert.crt
+      - KEY_FILE  = /etc/pem/key.key
+    restart: always
+    volumes:
+      - /srv/gitea/data:/data
+      - /srv/gitea/config:/etc/config
+
+      - /srv/gitea/timezone:/etc/timezone:ro
+      - /srv/gitea/localtime:/etc/localtime:ro
+    ports:
+      - '8929:3000'
+      - '8922:22'

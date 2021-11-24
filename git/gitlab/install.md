@@ -13,9 +13,7 @@ export GITLAB_HOME=/srv/gitlab
 
 ### https 自签名证书
 
-> sudo openssl req -new -x509 -days 36500 -nodes -out config/nginx.pem \
-
-         -keyout config/nginx.key -subj "/C=US/CN=gitlab/O=gitlab.com"
+> sudo openssl req -new -x509 -days 36500 -nodes -out config/nginx.pem -keyout config/nginx.key -subj "/C=US/CN=gitlab/O=gitlab.com"
 
 #nginx['redirect_http_to_https'] = true
 #letsencrypt['enable'] = false

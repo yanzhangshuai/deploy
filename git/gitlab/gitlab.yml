@@ -13,7 +13,7 @@ services:
         letsencrypt['enable'] = false
         nginx['ssl_certificate'] = "/etc/gitlab/nginx.pem"
         nginx['ssl_certificate_key'] = "/etc/gitlab/nginx.key"
-        # 关闭电子邮件相关功能
+          # 关闭电子邮件相关功能
         gitlab_rails['smtp_enable'] = false
         gitlab_rails['gitlab_email_enabled'] = false
         gitlab_rails['incoming_email_enabled'] = false
@@ -53,11 +53,9 @@ services:
         pages_nginx['enable'] = false
 
         # 禁用 PUMA 集群模式
-        puma['enable'] = true
-        puma['worker_timeout'] = 60
-        puma['worker_processes'] = 2
-        puma['max_threads'] = 4
-        puma['per_worker_max_memory_mb'] = 1024
+        puma['worker_processes'] = 0
+        puma['min_threads'] = 1
+        puma['max_threads'] = 2
 
         # 降低后台守护进程并发数
         sidekiq['max_concurrency'] = 5
@@ -75,8 +73,6 @@ services:
         gitlab_exporter['enable'] = false
         grafana['enable'] = false
         sidekiq['metrics_enabled'] = false
-        postgresql['shared_buffers'] = "256MB"
-        postgresql['max_worker_processes'] = 8
     ports:
       - '8929:8929'
       - '2224:22'
