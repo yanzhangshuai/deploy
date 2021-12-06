@@ -7,9 +7,9 @@ services:
     environment:
       DRONE_GITEA_SERVER: http://82.157.55.94:8929
       DRONE_GITEA_CLIENT_ID: 'b3ab48b3-ee2d-4d1e-999e-2ec62c41972b'
-      DRONE_GITEA_CLIENT_SECRET: 'PECCuWdoJU9g9wKFJ0X9Mvv75y0f1T3eMb3Gu0VyDEyi'
-      DRONE_SERVER_HOST: '82.157.55.94:7929'
-      DRONE_SERVER_PROTO: 'http'
+      DRONE_GITEA_CLIENT_SECRET: 'kGsG0lBVo9P7CeQfZmi5Pfv11jRwRtZ9tXgSdeoHvh5b'
+      DRONE_SERVER_HOST: 'drone.mwjz.live'
+      DRONE_SERVER_PROTO: 'https'
       DRONE_RPC_SECRET: 'e1ad8a7f3dbc68ca9c21bcc949335009'
     ports:
       - '7929:80'
@@ -21,9 +21,9 @@ services:
     restart: always
     environment:
       DRONE_RUNNER_NAME: 'my-first-runner'
-      DRONE_RPC_HOST: '10.0.24.12:7929'
+      DRONE_RPC_HOST: 'https://drone.mwjz.live'
       DRONE_RUNNER_CAPACITY: 2
-      DRONE_SERVER_HOST: '82.157.55.94:7930'
+      DRONE_SERVER_HOST: '10.0.24.12:7930'
       DRONE_SERVER_PROTO: 'http'
       DRONE_RPC_SECRET: 'e1ad8a7f3dbc68ca9c21bcc949335009'
       DRONE_UI_USERNAME: 'yxs70707'
