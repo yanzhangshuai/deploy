@@ -1,0 +1,15 @@
+bower_components
+build
+node_modules
+.oss-cache-xuexi-static
+
+.oss-cache-slide-static
+.vscode/settings.json
+.idea/
+typings
+.history
+package-lock.json
+.awcache
+dist
+yarn.lock
+yarn-error.log

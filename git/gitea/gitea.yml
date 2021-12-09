@@ -7,9 +7,9 @@ services:
       - USER_UID = 1000
       - USER_GID = 1000
       - APP_NAME = gitea
-      - PROTOCOL = http
-      - DOMAIN = 82.157.55.94
-      - ROOT_URL = http://82.157.55.94:8929/
+      - PROTOCOL = https
+      - DOMAIN = gitea.mwjz.live
+      - ROOT_URL = https://gitea.mwjz.live/
       - CERT_FILE = /etc/config/cert.crt
       - KEY_FILE  = /etc/pem/key.key
     restart: always
