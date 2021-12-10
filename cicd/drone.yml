@@ -1,18 +1,18 @@
 version: '2.0'
 services:
-  drone:
-    image: drone/drone:1
-    container_name: drone_server
+  drone-server:
+    image: drone/drone:2
+    container_name: drone-server
     restart: always
     environment:
       DRONE_GITEA_SERVER: 'http://82.157.55.94:8929'
-      DRONE_GITEA_CLIENT_ID: '3601a547-effd-46de-967d-8ea0e4a9b2b1'
-      DRONE_GITEA_CLIENT_SECRET: 'yFWXdRjFDEPsnrhvW1jtSGdkcIkKs4EJn6h8LP98hqU5'
+      DRONE_GITEA_CLIENT_ID: 'aaa1765d-35e1-4ef4-8798-2269f422bb1d'
+      DRONE_GITEA_CLIENT_SECRET: 'XPw8Zk8fpfAVbEt9CH8XCLBJal2WmjjKjDIsZ8fLUU0T'
       DRONE_RUNNER_CAPACITY: 2
       DRONE_SERVER_HOST: 'drone.mwjz.live'
       DRONE_SERVER_PROTO: 'https'
       DRONE_RPC_SECRET: 'e1ad8a7f3dbc68ca9c21bcc949335009'
-      DRONE_USER_CREAT: 'username:yxs970707,admin:true'
+      DRONE_USER_CREATE: 'username:yxs970707,admin:true'
     ports:
       - '7929:80'
     # networks:
@@ -37,19 +37,20 @@ services:
     ports:
       - 7931:3000
     depends_on:
-      - drone
+      - drone-server
     # networks:
     #   drone-net:
     #     aliases:
     #       - drone-ssh-runner
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-  runner:
+
+  docker-runner:
     image: drone/drone-runner-docker:1
-    container_name: drone_runner
+    container_name: drone-docker-runner
     restart: always
     environment:
-      DRONE_RUNNER_NAME: 'drone-runner'
+      DRONE_RUNNER_NAME: 'drone-docker-runner'
       DRONE_RPC_HOST: '10.0.24.12:7929'
       DRONE_RUNNER_CAPACITY: 2
       DRONE_SERVER_HOST: '10.0.24.12:7930'
@@ -60,13 +61,31 @@ services:
     ports:
       - '7930:3000'
     depends_on:
-      - drone
+      - drone-server
     # networks:
     #   drone-net:
     #     aliases:
     #       - drone-runner
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
+  # agent-runner:
+  #   image: drone/agent:latest
+  #   container_name: drone-agent-runner
+  #   restart: always
+  #   environment:
+  #     DRONE_RUNNER_NAME: 'drone-agent-runner'
+  #     DRONE_RPC_HOST: '10.0.24.12:7929'
+  #     DRONE_RUNNER_CAPACITY: 2
+  #     DRONE_SERVER_PROTO: 'https'
+  #     DRONE_RPC_SECRET: 'e1ad8a7f3dbc68ca9c21bcc949335009'
+  #   depends_on:
+  #     - drone-server
+  #   # networks:
+  #   #   drone-net:
+  #   #     aliases:
+  #   #       - drone-runner
+  #   volumes:
+  #     - '/var/run/docker.sock:/var/run/docker.sock'
 # networks:
 #   drone-net:
 #     external: true # 使用外部网络, 需先创建网络

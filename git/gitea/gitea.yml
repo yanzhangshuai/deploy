@@ -4,19 +4,20 @@ services:
     image: gitea/gitea:latest
     container_name: gitea
     environment:
-      - USER_UID = 1000
-      - USER_GID = 1000
-      - APP_NAME = gitea
-      - PROTOCOL = https
-      - DOMAIN = gitea.mwjz.live
-      - ROOT_URL = https://gitea.mwjz.live/
-      - CERT_FILE = /etc/config/cert.crt
-      - KEY_FILE  = /etc/pem/key.key
+      - USER_UID=1000
+      - USER_GID=1000
+      - APP_NAME=gitea
+      - PROTOCOL=https
+      - DOMAIN=gitea.mwjz.live
+      - ROOT_URL=https://gitea.mwjz.live/
+      - CERT_FILE=/etc/config/cert.crt
+      - KEY_FILE=/etc/pem/key.key
+      - GITEA__webhook__SKIP_TLS_VERIFY=true
+      - GITEA__webhook__DELIVER_TIMEOUT=10
     restart: always
     volumes:
       - /srv/gitea/data:/data
       - /srv/gitea/config:/etc/config
-
       - /srv/gitea/timezone:/etc/timezone:ro
       - /srv/gitea/localtime:/etc/localtime:ro
     ports:
