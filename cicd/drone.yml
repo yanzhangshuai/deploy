@@ -9,7 +9,7 @@ services:
       DRONE_SERVER_PROTO: 'https'
       DRONE_SERVER_HOST: 'drone.mwjz.live'
       DRONE_RPC_SECRET: 'e1ad8a7f3dbc68ca9c21bcc949335009'
-      DRONE_GITEA_SERVER: 'http://82.157.55.94:8929'
+      DRONE_GITEA_SERVER: 'https://gitea.mwjz.live'
       DRONE_GITEA_CLIENT_ID: 'aaa1765d-35e1-4ef4-8798-2269f422bb1d'
       DRONE_GITEA_CLIENT_SECRET: 'XPw8Zk8fpfAVbEt9CH8XCLBJal2WmjjKjDIsZ8fLUU0T'
       DRONE_USER_CREATE: 'username:yxs970707,admin:true'
