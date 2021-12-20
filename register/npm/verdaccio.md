@@ -5,3 +5,13 @@
 ### nginx 代理
 
 设置 nginx 代理时需要设置 **VERDACCIO_PUBLIC_URL(访问域名)**、 **url_prefix（访问地址）**
+
+
+
+
+### 查看日志
+> docker logs --tail 20 npm-register
+
+
+### 设置权限
+> sudo chown -R 10001:65533 storage
